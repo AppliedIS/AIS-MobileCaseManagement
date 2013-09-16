@@ -226,7 +226,7 @@ body, html {
 .km-ios .km-list > li,
 .km-flat .km-list>li {
     background:none;
-    border:none;
+    /*border:none;*/
 }
 
 /* Separator Style*/
