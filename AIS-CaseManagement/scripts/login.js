@@ -2,42 +2,60 @@
     var LoginViewModel,
         app = global.app = global.app || {};
 
-    LoginViewModel = kendo.data.ObservableObject.extend({
-        isLoggedIn: false,
-        username: "",
-        password: "",
+    LoginViewModel = function(){
+        var self = this;
+        self.isLoggedIn = false;
+        self.username = localStorage.getItem("username");
+        self.password = localStorage.getItem("password");
 
-        onLogin: function () {
-            var that = this,
-                username = that.get("username").trim(),
-                password = that.get("password").trim();
-
-            if (username === "" || password === "") {
+        self.onLogin = function () {
+            console.log("Username: " + self.username + "; Password: " + self.password);
+            if (self.username === "" || self.password === "") {
                 navigator.notification.alert("Both fields are required!",
                     function () { }, "Login failed", 'OK');
 
                 return;
             }
 
-            that.set("isLoggedIn", true);
+            app.application.showLoading();
+            app.api.executeLogin(self.username, self.password, function(data){
+               console.log("response from executeLogin", data); 
+                if(data === "Unauthorized"){
+                    navigator.notification.alert("Login failed!");
+                }
+                else if (data === "Success"){
+                    // Save username/password for next time
+                    localStorage.setItem("username", self.username);
+                    localStorage.setItem("password", self.password);
+                    
+                    // Perform all refresh methods 
+                    app.reloadAll();
+                    app.application.navigate("dashboard-view");
+                }
+                else{
+                    navigator.notification.alert("Unexpected error while logging in!");   
+                }
+                app.application.hideLoading();
+            });
+            self.isLoggedIn = true;
         },
 
-        onLogout: function () {
+        self.onLogout = function () {
             var that = this;
 
             that.clearForm();
             that.set("isLoggedIn", false);
         },
 
-        clearForm: function () {
+        self.clearForm = function () {
             var that = this;
 
             that.set("username", "");
             that.set("password", "");
         }
-    });
-
-    app.loginService = {
-        viewModel: new LoginViewModel()
+        
+        ko.track(this);
     };
+
+    app.loginVM = new LoginViewModel();
 })(window);

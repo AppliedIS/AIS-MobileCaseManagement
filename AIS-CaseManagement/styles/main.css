@@ -293,3 +293,23 @@ body, html {
         background-size:100%;
     }
 }
+
+
+
+/***** CUSTOM STYLES *****/
+.smallText{
+    font-size: 8px;
+}
+
+.mediumText{
+    font-size: 14px;
+}
+
+.task-form {
+    padding-left: 12px;   
+}
+
+.workflow-heading{
+    text-align: center;
+    padding-top: 20px;
+}
