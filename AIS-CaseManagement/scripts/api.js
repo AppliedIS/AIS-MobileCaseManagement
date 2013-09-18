@@ -65,7 +65,7 @@
     };
     
     self.getCaseFactsById = function(caseId, callback){
-        self.httpPost(baseUrl + "casefacts.aspx/GetCaseFactsByCaseId", { hostUrl: inputParams.hostUrl, id: caseId }, callback);
+        self.httpPost(baseUrl + "/casefacts.aspx/GetCaseFactsByCaseId", { hostUrl: inputParams.hostUrl, caseId: caseId.toString() }, callback);
     };
     
     

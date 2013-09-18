@@ -13,6 +13,7 @@
         <script src="scripts/knockout-es5.js"></script>
         <script src="scripts/underscore-1.5.2.min.js"></script>
         <script src="scripts/moment.js"></script>
+        <script src="scripts/ms-mapcontrol.js"></script>
         
         <script src="scripts/app.js"></script>
         <script src="scripts/api.js"></script>
@@ -93,14 +94,20 @@
                     </li>
                     
                     <li data-bind="with: selectedCase">
-                        <a>
-                            Case Facts    
-                        </a>
+                        <!--<a href="#case-facts-view">Case Facts</a>-->
+                        <a data-bind="click: goToCaseFacts">Case Facts</a>
                     </li>
                 </ul>
             </div>
         </div>
         
+        
+         <!--***** CASE FACTS *****-->
+        <div id="case-facts-view" data-role="view" data-title="Case Facts" data-stretch="true" data-transition="slide" data-layout="tabstrip-layout-inner">
+            <div data-role="content" class="view-content" data-bind="with: casesVM">
+                <div id="map-canvas"></div>
+            </div>
+        </div>
         
         
         
