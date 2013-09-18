@@ -64,6 +64,10 @@
         self.httpPost(baseUrl + "/case.aspx/GetCasesById", { hostUrl: inputParams.hostUrl, id: caseId }, callback);
     };
     
+    self.getCaseFactsById = function(caseId, callback){
+        self.httpPost(baseUrl + "casefacts.aspx/GetCaseFactsByCaseId", { hostUrl: inputParams.hostUrl, id: caseId }, callback);
+    };
+    
     
     /***** Operations for Tasks *****/
     self.getFormForTask = function(task, callback){
@@ -110,6 +114,7 @@
         getOpenCases: self.getOpenCases,
         getDocumentSummaryForCase: self.getDocumentSummaryForCase,
         getCasesById: self.getCasesById,
+        getCaseFactsById: self.getCaseFactsById,
         getDashboardTasks: self.getDashboardTasks,
         executeSearch: self.executeSearch,
         getFormForTask: self.getFormForTask,

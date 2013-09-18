@@ -23,7 +23,7 @@
     </head>
     <body>
         <!--***** DASHBOARD *****-->
-        <div id="dashboard-view" data-role="view" data-title="Case Management Dashboard" >
+        <div id="dashboard-view" data-role="view" data-title="Case Management" >
             <div data-role="content" class="view-content">
                 <ul data-role="listview" data-style="inset" data-type="group">
                     <li>
@@ -214,6 +214,7 @@
             <div data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title"></span>
+                    <a data-role="button" data-align="right" data-icon="refresh" data-bind="click: app.reloadAll"></a>
                 </div>
             </div>
 

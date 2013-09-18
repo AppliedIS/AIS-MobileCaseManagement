@@ -31,21 +31,33 @@
         };
         
         self.approveTask = function(){
-            console.log("selectedapprover", self.selectedApprover(), encodeURIComponent(self.selectedApprover()));
-            /*app.api.approveTask(self.selectedTask(), self.selectedApprover(), function(data){
-                self.completedTasks.push(self.selectedTask().id);
-            });*/
+            app.api.approveTask(self.selectedTask(), self.selectedApprover(), function(data){
+                self.completedTasks.push(self.selectedTask().Id);
+                self.loadData();
+                app.application.navigate("#:back");
+            });
         };
         
         self.rejectTask = function() {
-            /*app.api.rejectTask(self.selectedTask(), function(data){
-                self.completedTasks.push(self.selectedTask().id);
-            });*/
+            app.api.rejectTask(self.selectedTask(), function(data){
+                self.completedTasks.push(self.selectedTask().Id);
+                self.loadData();
+                app.application.navigate("#:back");
+            });
         };
         
         self.loadData = function(){
             app.api.getDashboardTasks(function(data){
-                self.tasks(data.d);
+                var taskList;
+                if (self.selectedTask()){
+                    taskList = _.filter(data.d, function(item) {
+                        return !_.contains(self.completedTasks(), item.Id);
+                    });
+                }
+                else{
+                    taskList = data.d;
+                }
+                self.tasks(taskList);
             });
         };
         
