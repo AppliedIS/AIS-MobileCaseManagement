@@ -109,6 +109,7 @@
                 self.selectedCase.caseForms(formsList);
             
                 // Set Important Dates
+                self.selectedCase.importantDates.removeAll();
                 var openingDt = moment(item.OpeningDate);
                 self.selectedCase.importantDates.push(openingDt.format("MM/DD/YYYY") + " - Case Opened");
                 var anniversaryDt = self.getAnniversaryDate(openingDt);
